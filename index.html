@@ -17,7 +17,7 @@
         }
 
         .max-words {
-            color: red;
+            color: red !important;
         }
     </style>
 </head>
@@ -27,7 +27,7 @@
         <h1 class="mb-4">Editor de microrrelatos</h1>
         <div class="form-group">
             <label for="textInput">Escribe aquí (hasta 200 palabras):</label>
-            <textarea class="form-control" id="textInput" rows="6"></textarea>
+            <textarea class="form-control" id="textInput" rows="12"></textarea>
         </div>
         <div id="wordCount" class="text-muted">Palabras escritas: 0 / 200</div>
     </div>
@@ -56,8 +56,10 @@
 
             // Mostrar texto en rojo al alcanzar las 200 palabras
             if (wordCount >= MAX_WORDS) {
+                textInput.classList.add('max-words');
                 wordCountIndicator.classList.add('max-words');
             } else {
+                textInput.classList.remove('max-words');
                 wordCountIndicator.classList.remove('max-words');
             }
         });
