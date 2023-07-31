@@ -22,7 +22,7 @@
         <h1 class="mb-4">Editor de microrrelatos</h1>
         <div class="form-group">
             <label for="textInput">Escribe aquí (hasta 200 palabras):</label>
-            <textarea class="form-control" id="textInput" rows="6" maxlength="200"></textarea>
+            <textarea class="form-control" id="textInput" rows="6"></textarea>
         </div>
         <div id="wordCount" class="text-muted">Palabras escritas: 0 / 200</div>
     </div>
@@ -32,11 +32,17 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
+        const MAX_WORDS = 200;
+
         document.getElementById('textInput').addEventListener('input', function () {
             const text = this.value.trim();
-            const wordCount = text === '' ? 0 : text.split(/\s+/).length;
-            const remainingWords = Math.max(200 - wordCount, 0);
-            document.getElementById('wordCount').textContent = `Palabras escritas: ${wordCount} / 200 - Palabras restantes: ${remainingWords}`;
+            const words = text.split(/\s+/);
+            const wordCount = words.length;
+            if (wordCount > MAX_WORDS) {
+                this.value = words.slice(0, MAX_WORDS).join(' ');
+            }
+            const remainingWords = Math.max(MAX_WORDS - wordCount, 0);
+            document.getElementById('wordCount').textContent = `Palabras escritas: ${wordCount} / ${MAX_WORDS} - Palabras restantes: ${remainingWords}`;
         });
     </script>
 </body>
