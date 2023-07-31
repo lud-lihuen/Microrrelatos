@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor de microrrelatos</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        #wordCount {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="mb-4">Editor de microrrelatos</h1>
+        <div class="form-group">
+            <label for="textInput">Escribe aquí (hasta 200 palabras):</label>
+            <textarea class="form-control" id="textInput" rows="6" maxlength="200"></textarea>
+        </div>
+        <div id="wordCount" class="text-muted">Palabras escritas: 0 / 200</div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('textInput').addEventListener('input', function () {
+            const text = this.value.trim();
+            const wordCount = text === '' ? 0 : text.split(/\s+/).length;
+            const remainingWords = Math.max(200 - wordCount, 0);
+            document.getElementById('wordCount').textContent = `Palabras escritas: ${wordCount} / 200 - Palabras restantes: ${remainingWords}`;
+        });
+    </script>
+</body>
+
+</html>
