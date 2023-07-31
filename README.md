@@ -1,2 +1,2 @@
 # Microrrelatos
-Editor de microrrelatos (hasta 200 palabras)
+Editor de microrrelatos (cuentos de hasta 200 palabras).
