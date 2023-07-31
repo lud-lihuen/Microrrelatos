@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editor de microrrelatos</title>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
@@ -41,17 +42,24 @@
         const wordCountIndicator = document.getElementById('wordCount');
 
         textInput.addEventListener('input', function () {
-            const text = this.value.trim();
-            const words = text.split(/\s+/);
-            const wordCount = words.length;
+            let text = this.value.trim();
+            let words = text.split(/\s+/);
+            let wordCount = words.length;
+            let remainingWords = Math.max(MAX_WORDS - wordCount, 0);
+
+            wordCountIndicator.textContent = `Palabras escritas: ${wordCount} / ${MAX_WORDS} - Palabras restantes: ${remainingWords}`;
+
+            // Limitar el texto a 200 palabras
             if (wordCount > MAX_WORDS) {
                 this.value = words.slice(0, MAX_WORDS).join(' ');
+            }
+
+            // Mostrar texto en rojo al alcanzar las 200 palabras
+            if (wordCount >= MAX_WORDS) {
                 wordCountIndicator.classList.add('max-words');
             } else {
                 wordCountIndicator.classList.remove('max-words');
             }
-            const remainingWords = Math.max(MAX_WORDS - wordCount, 0);
-            wordCountIndicator.textContent = `Palabras escritas: ${wordCount} / ${MAX_WORDS} - Palabras restantes: ${remainingWords}`;
         });
     </script>
 </body>
