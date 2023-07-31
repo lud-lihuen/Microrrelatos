@@ -14,6 +14,10 @@
         #wordCount {
             margin-top: 10px;
         }
+
+        .max-words {
+            color: red;
+        }
     </style>
 </head>
 
@@ -33,16 +37,21 @@
 
     <script>
         const MAX_WORDS = 200;
+        const textInput = document.getElementById('textInput');
+        const wordCountIndicator = document.getElementById('wordCount');
 
-        document.getElementById('textInput').addEventListener('input', function () {
+        textInput.addEventListener('input', function () {
             const text = this.value.trim();
             const words = text.split(/\s+/);
             const wordCount = words.length;
             if (wordCount > MAX_WORDS) {
                 this.value = words.slice(0, MAX_WORDS).join(' ');
+                wordCountIndicator.classList.add('max-words');
+            } else {
+                wordCountIndicator.classList.remove('max-words');
             }
             const remainingWords = Math.max(MAX_WORDS - wordCount, 0);
-            document.getElementById('wordCount').textContent = `Palabras escritas: ${wordCount} / ${MAX_WORDS} - Palabras restantes: ${remainingWords}`;
+            wordCountIndicator.textContent = `Palabras escritas: ${wordCount} / ${MAX_WORDS} - Palabras restantes: ${remainingWords}`;
         });
     </script>
 </body>
